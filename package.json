@@ -1,7 +1,6 @@
 {
-  "name": "tinyrocket",
+  "name": "ratio",
   "version": "0.9.14",
-  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
