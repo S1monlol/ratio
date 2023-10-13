@@ -3,33 +3,69 @@ import BlogHeader from "../components/BlogHeader.astro";
 import Page from "../components/Page.astro";
 
 const { content } = Astro.props;
-const { title, description, pubDate, heroImage, alt } = content;
+const { title, description, heroImage, alt } = content;
 ---
 
 <Page {title} {description}>
-    <BlogHeader title="My Blog" />
+  <BlogHeader title={title} />
 
-    {
-        heroImage && (
-            <div>
-                <img class="w-full" loading="eager" src={heroImage} alt={alt} />
-            </div>
-        )
+  {
+    heroImage && (
+      <div>
+        <img class="w-full" loading="eager" src={heroImage} alt={alt} />
+      </div>
+    )
+  }
+
+  <div class="flex justify-center">
+    <div class="text-lg w-5/6 lg:w-3/4 prose">
+      <div class="text-lg">
+        <slot />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    body {
+      background-color: #352f44;
+    }
+    h1,
+    h2,
+    h3,
+    p,
+    slot {
+      color: white;
+    }
+  </style>
+
+  <style is:inline>
+
+
+    
+
+    *,
+    *::before,
+    *::after {
+      color: #f2e9e4 !important; /* off-white */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important; /* slight text shadow to lift the text a bit */
+
+      /* font-family: 'Arial', sans-serif;   */
+      margin-bottom: 20px !important;
     }
 
-    <div class="flex justify-center text-zinc-700">
-        <div class="text-lg w-5/6 lg:w-3/4 prose">
-            <h1 class="text-2xl font-semibold mt-8">{title}</h1>
-            <p class="font-extralight mb-8">{pubDate}</p>
+    div a {
+      text-decoration: underline !important;
+      transition: color 0.3s, transform 0.3s !important;
+    }
 
-            <div>
-                <p class="text-lg my-6">
-                    {description}
-                </p>
-            </div>
-            <div class="prose text-lg">
-                <slot />
-            </div>
-        </div>
-    </div>
+    div a:hover {
+      color: #ffab40 !important; /* a light orange shade for hover effect */
+      transform: scale(1.05) !important;  
+    }
+
+    div * {
+      color: #f2e9e4 !important; /* off-white */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important; /* slight text shadow to lift the text a bit */
+    }
+  </style>
 </Page>

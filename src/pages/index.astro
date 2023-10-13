@@ -1,39 +1,46 @@
 ---
+import BlogHeader from "../components/BlogHeader.astro";
+import BlogPostPreview from "../components/BlogPostPreview.astro";
 import Page from "../components/Page.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 
-const title = "Tiny Rocket";
-const description = "A tiny Astro starter";
+const pages = await Astro.glob("./articles/*.mdx");
+
+const title = "Ratio";
+const description = "A collection of common arguements I have";
+
+// <aside data-pagefind-ignore> is a toggle for pagefind.app to exclude the
+// portion from search result, i.e. in this case to exclude the TOC from being
+// shown again in the result.
 ---
 
 <Page {title} {description}>
-    <SiteHeader />
+  <BlogHeader title={title} />
 
-    <div class="flex justify-center">
-        <div class="text-lg w-5/6 lg:w-3/4">
-            <h1 class="my-6 font-semibold">
-                {description}
-            </h1>
-            <p class="my-6">
-                Tiny Rocket is an Astro theme / template. It is intended to be a
-                starter, so it is minimally styled. You can push the design as
-                far out as possible with <a
-                    href="https://tailwindcss.com/"
-                    class="underline underline-offset-2">Tailwind CSS</a
-                >.
-            </p>
-            <p class="my-6">
-                Out of the box, Tiny Rocket includes site search, RSS feed, and
-                web map. See <a href="/doc" class="underline underline-offset-2"
-                    >documentation</a
-                >.
-            </p>
-            <p class="my-6">
-                Source is at <a
-                    href="https://github.com/slamethendry/tinyrocket"
-                    class="underline underline-offset-2">GitHub</a
-                >. MIT License.
-            </p>
+  <div class="flex justify-center">
+    <div class="text-lg w-5/6 lg:w-3/4">
+      <aside data-pagefind-ignore>
+        <div>
+          <p class="my-6 font-semibold text-white">
+            {description}
+          </p>
         </div>
+
+        <div class="grid grid-cols-4">
+          {
+            pages.map((p: any) => (
+              <div id="balla" class="m-3 rounded-lg shadow-lg w-">
+                <BlogPostPreview post={p} />
+              </div>
+            ))
+          }
+        </div>
+      </aside>
     </div>
+  </div>
+
+  <style>
+    #balla {
+      background-color: #5C5470;
+    }
+  </style>
 </Page>
