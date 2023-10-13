@@ -17,6 +17,7 @@
     "postcss": "^8.4.29"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^7.5.3",
     "@astrojs/rss": "^3.0.0",
     "@tailwindcss/typography": "^0.5.10",
     "preact": "^10.15.1",
